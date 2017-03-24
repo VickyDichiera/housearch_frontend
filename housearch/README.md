@@ -29,3 +29,14 @@ Run `ung github-pages:deploy` to deploy to Github Pages.
 ## Further help
 
 To get more help on the `universal-cli` use `ung --help` or go check out the [Universal-CLI README](https://github.com/devCrossNet/universal-cli/blob/master/README.md).
+
+##After
+##Twitter bootstrap
+In your project path run`npm install bootstrap@3 --save`
+To load the styles change the angular-cli.json file by adding "../node_modules/bootstrap/dist/css/bootstrap.css" in the styles array. It has to look like this:   
+`
+"styles": [
+    "../node_modules/bootstrap/dist/css/bootstrap.css",
+    "styles.css"
+  ]
+`
