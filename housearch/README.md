@@ -30,8 +30,8 @@ Run `ung github-pages:deploy` to deploy to Github Pages.
 
 To get more help on the `universal-cli` use `ung --help` or go check out the [Universal-CLI README](https://github.com/devCrossNet/universal-cli/blob/master/README.md).
 
-##After
-##Twitter bootstrap
+## After installation
+## Twitter bootstrap
 In your project path run`npm install bootstrap@3 --save`
 To load the styles change the angular-cli.json file by adding "../node_modules/bootstrap/dist/css/bootstrap.css" in the styles array. It has to look like this:   
 `
@@ -40,3 +40,6 @@ To load the styles change the angular-cli.json file by adding "../node_modules/b
     "styles.css"
   ]
 `
+##Include sass preprocessor
+Run `npm install node-sass sass-loader --save`
+Create a new directory call 'webpack.config.js'
