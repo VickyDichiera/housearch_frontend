@@ -40,6 +40,6 @@ To load the styles change the angular-cli.json file by adding "../node_modules/b
     "styles.css"
   ]
 `
-##Include sass preprocessor
+## Include sass preprocessor
 Run `npm install node-sass sass-loader --save`
 Create a new directory call 'webpack.config.js'
