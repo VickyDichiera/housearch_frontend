@@ -9,6 +9,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HousesComponent } from './houses/houses.component';
 import { FavoritesComponent } from './houses/favorites/favorites.component';
+import { HousesService } from './houses/houses.service'
 
 const appRoutes : Routes = [
   {
@@ -39,7 +40,9 @@ const appRoutes : Routes = [
       appRoutes
     ),
   ],
-  providers: [],
+  providers: [
+    HousesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

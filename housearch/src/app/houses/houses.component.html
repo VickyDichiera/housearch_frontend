@@ -1,1 +1,72 @@
-<h1>{{title}}</h1>
+<div class="container">
+    <h1>{{title}}</h1>
+
+    <!--
+    advertiser_name:" Earlwoode - profesional "
+    advertiser_phone:" 635 094 091 "
+    basic_features:" 36 m² construidos, 32 m² útiles , 1 habitación , 1 baño , Segunda mano/buen estado , Armarios empotrados , Cocina equipada y casa sin amueblar "
+    building_features:" Planta 3ª exterior , Con ascensor , Certificación energética: , (IPE no indicado) "
+    city:" Madrid capital, Madrid "
+    deposit_months:"1.00"
+    description:"Apartamento en el corazón de Malasaña. 32m2. 1 habitación. Cocina equipada (frigorífico, lavadora, horno, etc). Baño completo. Calefacción eléctrica. Muy luminoso. Ascensor. Finca con portero. 1 mes de fianza. Comisión 550€." "
+    district:" Distrito Centro "
+    equipment:" Aire acondicionado , Jardín "
+    external_id:"32214828"
+    houseimage_set: Array[7]
+      0: Object
+        order:0
+        url:"https://img3.idealista.com/blur/WEB_DETAIL/0/id.pro.es.image.master/a3/cd/65/128651049.jpg"
+        url_small:"https://img3.idealista.com/blur/WEB_LISTING/0/id.pro.es.image.master/a3/cd/65/128651049.jpg"
+    neighborhood:" Barrio Malasaña-Universidad "
+    price:"710.00"
+    price_m2:"19.72"
+    size:"36.00"
+    street:"Calle de la palma, 34"
+    title:"Alquiler de piso en calle de la palma, 34, Malasaña-Universidad, Madrid"
+    updated_date:null
+    updated_date_string:"Anuncio actualizado el 21 de marzo"
+    url:"https://www.idealista.com/inmueble/32214828/"
+  -->
+  <div *ngFor="let house of houses">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{house.title}}</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12 information">
+            <div class="row">
+              <div class="col-md-6">
+                <ul class="countable list-group">
+                  <li class="list-group-item"><strong>Precio: </strong>{{house.price}} €/mes</li>
+                  <li class="list-group-item"><strong>Tamaño: </strong>{{house.size}} m²</li>
+                  <li class="list-group-item"><strong>Precio por metro cuadrado: </strong>{{house.price_m2}} eur/m²</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <ul>
+                  <li class="list-group-item"><strong>Fianza: </strong>{{house.deposit_months}} mes/es</li>
+                  <li class="list-group-item"><strong>Distrito: </strong>{{house.district}}</li>
+                  <li class="list-group-item"><strong>Url: </strong><a [href]="house.url">{{house.url}}</a></li>
+                </ul>
+              </div>
+            </div>
+            <div><p><em>{{house.description}}</em></p></div>
+            <div class="features">
+              <div class=""><strong>Habitaciones: </strong>{{house.rooms}}</div>
+              <div class=""><strong>Caracteristicas básicas: </strong>{{house.basic_features}}</div>
+              <div class=""><strong>Caracteristicas edilicias: </strong>{{house.building_features}}</div>
+              <div class="" *ngIf="house.equipment"><strong>Equipamiento: </strong>{{house.equipment}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 photos">
+              <img *ngFor="let photo of house.houseimage_set" [src]="photo.url_small" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
