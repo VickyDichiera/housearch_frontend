@@ -26,7 +26,7 @@ export class HousesComponent {
   getHouses(){
     this.housesService.getHouses()
       .subscribe(
-        data => {this.houses = data, console.log(data)},
+        data => {this.houses = data.data, console.log(data.data)},
         error => console.log(error)
       );
   }
