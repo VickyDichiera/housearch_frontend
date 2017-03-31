@@ -12,12 +12,13 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class HousesService {
-  constructor(private http: Http, private router: Router) { }
   private backendUrl = environment.backendUrl;
   private housesUrl = this.backendUrl+'houses';
 
-  getHouses(): Observable<any[]> {
-    return this.http.get(this.housesUrl)
+  constructor(private http: Http, private router: Router) { }
+
+  getHouses(page): Observable<any[]> {
+    return this.http.get(`${this.housesUrl}/?page=${page}`)
       .map(response => response.json())
       .catch(error => Observable.throw(error.json().error || 'Server error'));
   }

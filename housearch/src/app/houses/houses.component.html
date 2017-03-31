@@ -68,5 +68,22 @@
       </div>
     </div>
   </div>
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      <li>
+        <a href="#" aria-label="Previous" (click)="paginator($event, currentPage-1)">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li *ngFor="let page of arrayTotalPages" [class.active]="page === currentPage">
+        <a (click)="paginator($event, page)" href="#">{{page}}</a>
+      </li>
 
+      <li>
+        <a href="#" aria-label="Next" (click)="paginator($event, currentPage+1)">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>

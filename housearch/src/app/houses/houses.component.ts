@@ -13,6 +13,9 @@ import { HousesService } from './houses.service';
 export class HousesComponent {
   public houses: any[];
   public title: string;
+  public currentPage: number = 1;
+  public arrayTotalPages: any[];
+  public totalPages: number;
 
   constructor(
     private housesService: HousesService,
@@ -20,14 +23,32 @@ export class HousesComponent {
   ) {}
 
   ngOnInit(): void{
-      this.title = 'Houses here';
-      this.getHouses();
+    this.title = 'Houses here';
+    this.getHouses(this.currentPage);
   }
-  getHouses(){
-    this.housesService.getHouses()
-      .subscribe(
-        data => {this.houses = data.data, console.log(data.data)},
-        error => console.log(error)
-      );
+  getHouses(page){
+    this.housesService.getHouses(page)
+    .subscribe(
+      data => {this.houses = data['data'],
+      this.totalPages =  data['pages'],
+      this.arrayTotalPages = this.range(1, data['pages']);
+      this.currentPage = page;
+    },
+    error => console.log(error)
+    );
+  }
+
+  paginator(event, page){
+    event.preventDefault();
+    if(page > 0 && page < this.totalPages+1){
+      this.getHouses(page);
+    }
+  }
+
+  range(start, end, step = 1) {
+    let array: number[] = [];
+    const len = Math.floor((end - start) / step) + 1
+    for(let i = 0; i < len; ++i) { array.push(i+1) }
+    return array;
   }
 }
