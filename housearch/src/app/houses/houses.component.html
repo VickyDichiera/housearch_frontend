@@ -75,7 +75,7 @@
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
-      <li *ngFor="let page of arrayTotalPages" [class.active]="page === currentPage">
+      <li *ngFor="let page of arrayTotalPages" [class.active]="page == currentPage">
         <a (click)="paginator($event, page)" href="#">{{page}}</a>
       </li>
 

@@ -10,6 +10,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HousesComponent } from './houses/houses.component';
 import { FavoritesComponent } from './houses/favorites/favorites.component';
 import { HousesService } from './houses/houses.service'
+import { SearchComponent } from './houses/search/search.component'
 
 const appRoutes : Routes = [
   {
@@ -30,7 +31,8 @@ const appRoutes : Routes = [
   declarations: [
     AppComponent,
     HousesComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

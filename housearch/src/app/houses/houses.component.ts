@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component }          from '@angular/core';
 import { Router }             from '@angular/router';
 import { Observable }         from 'rxjs/Observable';
+import { Subscription }       from 'rxjs/Subscription';
 
-import { HousesService } from './houses.service';
+import { HousesService }      from './houses.service';
 
 @Component({
   selector: 'houses',
@@ -11,31 +12,35 @@ import { HousesService } from './houses.service';
   providers: [ HousesService ],
 })
 export class HousesComponent {
-  public houses: any[];
-  public title: string;
-  public currentPage: number = 1;
-  public arrayTotalPages: any[];
-  public totalPages: number;
+  houses: any[];
+  title: string;
+  currentPage: number;
+  arrayTotalPages: any[];
+  totalPages: number;
+  subscription: Subscription;
+  auxPage: number = 1;
 
   constructor(
     private housesService: HousesService,
     private router: Router
-  ) {}
+  ) {
+    this.subscription = this.housesService.getHouses()
+                        .subscribe(houses => {
+                                  this.houses = houses.data;
+                                  this.totalPages = houses.pages;
+                                  this.arrayTotalPages = this.range(1, houses.pages);
+                                  this.currentPage = this.auxPage;
+                                  });
+  }
 
   ngOnInit(): void{
     this.title = 'Houses here';
-    this.getHouses(this.currentPage);
+    this.housesService.publicGetHouses(this.currentPage);
   }
+
   getHouses(page){
-    this.housesService.getHouses(page)
-    .subscribe(
-      data => {this.houses = data['data'],
-      this.totalPages =  data['pages'],
-      this.arrayTotalPages = this.range(1, data['pages']);
-      this.currentPage = page;
-    },
-    error => console.log(error)
-    );
+    this.housesService.publicGetHouses(page);
+    this.auxPage = page;
   }
 
   paginator(event, page){
