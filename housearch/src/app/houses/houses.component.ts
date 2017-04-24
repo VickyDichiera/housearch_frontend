@@ -1,4 +1,4 @@
-import { Component }          from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router }             from '@angular/router';
 import { Observable }         from 'rxjs/Observable';
 import { Subscription }       from 'rxjs/Subscription';
@@ -11,7 +11,7 @@ import { HousesService }      from './houses.service';
   styleUrls: ['./houses.component.scss'],
   providers: [ HousesService ],
 })
-export class HousesComponent {
+export class HousesComponent implements OnDestroy{
   houses: any[];
   title: string;
   currentPage: number;
@@ -24,18 +24,19 @@ export class HousesComponent {
     private housesService: HousesService,
     private router: Router
   ) {
-    this.subscription = this.housesService.getHouses()
-                        .subscribe(houses => {
-                                  this.houses = houses.data;
-                                  this.totalPages = houses.pages;
-                                  this.arrayTotalPages = this.range(1, houses.pages);
-                                  this.currentPage = this.auxPage;
-                                  });
-  }
-
-  ngOnInit(): void{
     this.title = 'Houses here';
-    this.housesService.publicGetHouses(this.currentPage);
+    this.subscription = housesService.houses$.subscribe(
+     houses => {
+       this.houses = houses.data;
+       this.totalPages = houses.pages;
+       this.arrayTotalPages = this.range(1, houses.pages);
+       this.currentPage = this.auxPage;
+     });
+
+     this.housesService.publicGetHouses(this.currentPage);
+  }
+  ngOnDestroy() {
+   this.subscription.unsubscribe();
   }
 
   getHouses(page){

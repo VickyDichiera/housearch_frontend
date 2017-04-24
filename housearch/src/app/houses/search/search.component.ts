@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router }             from '@angular/router';
-import { Observable }         from 'rxjs/Observable';
-import { Subject }            from 'rxjs/Subject';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { HousesService } from '../houses.service';
 
@@ -13,21 +12,22 @@ import { HousesService } from '../houses.service';
 })
 export class SearchComponent {
   page: number = 1;
-  query: string = '';
-  private searchTerm$ = new Subject<string>();
+  searchForm;
 
   constructor(
     private housesService: HousesService,
     private router: Router,
+    public fb: FormBuilder,
   ) {}
 
   ngOnInit(): void{
+    this.searchForm = this.fb.group({
+      term: [""],
+    });
+   }
 
+  search(event) {
+    let term = this.searchForm.value.term
+    this.housesService.publicGetHouses(this.page, term);
   }
-  search(terms: string) {
-  }
-  getResults(query){
-  
-  }
-
 }
